@@ -4,7 +4,6 @@
 
 require_once __DIR__ . '/BaseController.php';
 require_once __DIR__ . '/../models/Update.php';
-require_once __DIR__ . '/../utils/SalvaArquivos.php';
 require_once __DIR__ . '/../utils/Response.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key; // Adicione isso aqui

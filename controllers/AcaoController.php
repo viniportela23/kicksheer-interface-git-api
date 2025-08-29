@@ -41,7 +41,11 @@ class AcaoController extends BaseController {
         }
 
         if (!empty($ListaRepositorios["data"]["diretorio"]) && $operacao !== null) {
-            $prompt = 'cd ' . $ListaRepositorios["data"]["diretorio"] . ' && git ' . $operacao;
+            if ($operacao === "clone") {
+                $prompt = 'cd ' . $ListaRepositorios["data"]["diretorio"] . ' && git ' . $operacao . ' ' . $ListaRepositorios["data"]["link_repositorio"] . '.git';
+            } else {
+                $prompt = 'cd ' . $ListaRepositorios["data"]["diretorio"] . ' && git ' . $operacao;
+            }
 
             $modelAcaoRepositorio = new Acao($this->db);
             $AcaoRepositorio = $modelAcaoRepositorio->execucaoCodigoPrompt($prompt);
@@ -53,7 +57,8 @@ class AcaoController extends BaseController {
                 ]);
             } else {
                 Response::unprocessableEntity([
-                    "message" => "O correu um erro ao realizar a acao"
+                    "message" => $AcaoRepositorio,
+                    "comando" => $prompt,       
                 ]);
       
             }

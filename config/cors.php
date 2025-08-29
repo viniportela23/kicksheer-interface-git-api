@@ -1,6 +1,6 @@
 <?php
 $allowedOrigins = [
-    'https://screenad.kicksheer.com.br',
+    'https://dash-git.kicksheer.com.br',
     'http://localhost:3000',
 ];
 
@@ -9,7 +9,7 @@ $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 if (in_array($origin, $allowedOrigins)) {
     header("Access-Control-Allow-Origin: $origin");
 } else {
-    header("Access-Control-Allow-Origin: https://screenad.kicksheer.com.br");
+    header("Access-Control-Allow-Origin: https://dash-git.kicksheer.com.br");
 }
 
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, Token-Authorization");

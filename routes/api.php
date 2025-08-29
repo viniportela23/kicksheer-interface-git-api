@@ -35,20 +35,8 @@ switch ($urlParts[0]) {
 
         $listaController = new ListaController();
         switch ($urlParts[1] ?? '') {
-            case 'anunciantes':
-                $listaController->anunciantes($novoToken);
-                break;
-            case 'prodCardapio':
-                $listaController->prodCardapio($novoToken);
-                break;
-            case 'layoutCardapio':
-                $listaController->layoutCardapio($novoToken);
-                break;
-            case 'usuario':
-                $listaController->usuario($novoToken);
-                break;
-            case 'notificacoes':
-                $listaController->notificacoes($novoToken);
+            case 'repositorios':
+                $listaController->repositorios($novoToken);
                 break;
             default:
                 http_response_code(404);
@@ -67,14 +55,8 @@ switch ($urlParts[0]) {
 
         $AdicaoController = new AdicaoController();
         switch ($urlParts[1] ?? '') {
-            case 'anunciantes':
-                $AdicaoController->anunciantes($novoToken);
-                break;
-            case 'prodCardapio':
-                $AdicaoController->prodCardapio($novoToken);
-                break;
-            case 'layoutCardapio':
-                $AdicaoController->layoutCardapio($novoToken);
+            case 'repositorios':
+                $AdicaoController->repositorios($novoToken);
                 break;
             default:
                 http_response_code(404);
@@ -93,17 +75,8 @@ switch ($urlParts[0]) {
 
         $UpdateController = new UpdateController();
         switch ($urlParts[1] ?? '') {
-            case 'anunciantes':
-                $UpdateController->anunciantes($novoToken);
-                break;
-            case 'prodCardapio':
-                $UpdateController->prodCardapio($novoToken);
-                break;
-            case 'layoutCardapio':
-                $UpdateController->layoutCardapio($novoToken);
-                break;
-            case 'notificacoes':
-                $UpdateController->notificacoes($novoToken);
+            case 'repositorios':
+                $UpdateController->repositorios($novoToken);
                 break;
             default:
                 http_response_code(404);
@@ -122,14 +95,28 @@ switch ($urlParts[0]) {
 
         $DeletaController = new DeletaController();
         switch ($urlParts[1] ?? '') {
-            case 'anunciantes':
-                $DeletaController->anunciantes($novoToken);
+            case 'repositorios':
+                $DeletaController->repositorios($novoToken);
                 break;
-            case 'prodCardapio':
-                $DeletaController->prodCardapio($novoToken);
+            default:
+                http_response_code(404);
+                echo json_encode(["message" => "Endpoint de lista não encontrado"]);
                 break;
-            case 'layoutCardapio':
-                $DeletaController->layoutCardapio($novoToken);
+        }
+        break;
+    case 'acao':
+        // Primeiro validar o token JWT
+        require_once __DIR__ . '/../controllers/BaseController.php';
+        $baseController = new BaseController();
+        $novoToken = $baseController->validateJWT(); // Isso vai parar a execução se o token for inválido
+        
+        // Se chegou aqui, o token é válido, pode continuar
+        require_once __DIR__ . '/../controllers/AcaoController.php';
+
+        $AcaoController = new AcaoController();
+        switch ($urlParts[1] ?? '') {
+            case 'repositorios':
+                $AcaoController->repositorios($novoToken);
                 break;
             default:
                 http_response_code(404);

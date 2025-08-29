@@ -58,54 +58,6 @@ class Buscas extends BaseModel {
 	        'data' => $resultados
 	    ];
 	}
-
-
-	public function ConsultaCompleta($table) {
-	    $query = "SELECT * FROM " . $table;
-	    $stmt = $this->executeQuery($query);
-	    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	    
-	    if (empty($resultados)) {
-	        return [
-	            'message' => 'Nenhum dado encontrado'
-	        ];
-	    }
-	    
-	    return [
-	        'data' => $resultados
-	    ];
-	}
-	public function ConsultaCompletaBaseStatus($status, $table) {
-	    $query = "SELECT * FROM " . $table . " WHERE status = :status";
-	    $stmt = $this->executeQuery($query, [':status' => $status]);
-	    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	    
-	    if (empty($resultados)) {
-	        return [
-	            'message' => 'Nenhum dado encontrado'
-	        ];
-	    }
-	    
-	    return [
-	        'data' => $resultados
-	    ];
-	}
-	public function ConsultaCompletaBaseIDTabela($id, $table) {
-	    $query = "SELECT * FROM " . $table . " WHERE id = :id";
-	    $stmt = $this->executeQuery($query, [':id' => $id]);
-	    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	    
-	    if (empty($resultados)) {
-	        return [
-	            'message' => 'Nenhum dado encontrado'
-	        ];
-	    }
-	    
-	    return [
-	        'data' => $resultados
-	    ];
-	}
-
 }
 
 ?>

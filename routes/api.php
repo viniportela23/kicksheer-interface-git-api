@@ -118,6 +118,9 @@ switch ($urlParts[0]) {
             case 'repositorios':
                 $AcaoController->repositorios($novoToken);
                 break;
+            case 'cloudfler':
+                $AcaoController->cloudfler($novoToken);
+                break;
             default:
                 http_response_code(404);
                 echo json_encode(["message" => "Endpoint de lista não encontrado"]);

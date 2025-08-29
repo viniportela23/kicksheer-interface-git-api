@@ -42,7 +42,7 @@ class AcaoController extends BaseController {
 
         if (!empty($ListaRepositorios["data"]["diretorio"]) && $operacao !== null) {
             if ($operacao === "clone") {
-                $prompt = 'cd ' . $ListaRepositorios["data"]["diretorio"] . ' && git ' . $operacao . ' ' . $ListaRepositorios["data"]["link_repositorio"] . '.git';
+                $prompt = ' git ' . $operacao . ' ' . $ListaRepositorios["data"]["link_repositorio"] . '.git ' . $ListaRepositorios["data"]["diretorio"];
             } else {
                 $prompt = 'cd ' . $ListaRepositorios["data"]["diretorio"] . ' && git ' . $operacao;
             }

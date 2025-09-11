@@ -107,5 +107,40 @@ class AcaoController extends BaseController {
         }
 
     }
+    public function terminal($dataToken) {
+
+        if ($this->requestMethod !== 'PUT') {
+            Response::methodNotAllowed();
+            return;
+        }
+
+        $data = json_decode(file_get_contents('php://input'), true);
+
+
+        if (!empty($data["shell"])) {
+
+            $modelAcaoRepositorio = new Acao($this->db);
+            $AcaoRepositorio = $modelAcaoRepositorio->execucaoCodigoPrompt($data["shell"]);
+
+            if ($AcaoRepositorio['success'] ===  true) {
+                Response::ok([
+                    "message" => $AcaoRepositorio,
+                    "token" => $dataToken['token']
+                ]);
+            } else {
+                Response::unprocessableEntity([
+                    "message" => $AcaoRepositorio,
+                    "comando" => $data["shell"],       
+                ]);
+      
+            }
+        } else {
+            Response::unprocessableEntity([
+                "message" => "Erro ao se comunicar com o banco."
+            ]);
+
+        }
+
+    }
 }
 ?>
